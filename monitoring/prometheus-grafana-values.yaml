@@ -1,0 +1,26 @@
+# Custom values for the kube-prometheus-stack Helm chart
+
+grafana:
+  # Use a placeholder for the admin password. In a real scenario,
+  # this would be populated from a secure secret.
+  adminPassword: "<CHANGE_ME_IN_A_REAL_DEPLOYMENT>"
+
+  # Configure persistence for Grafana dashboards, so they are not lost
+  # if the Grafana pod restarts.
+  persistence:
+    enabled: true
+    type: pvc
+    size: 10Gi
+    storageClassName: "gp2"
+
+prometheus:
+  # Configure persistence for Prometheus metrics data.
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "gp2"
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi

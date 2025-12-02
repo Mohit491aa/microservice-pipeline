@@ -1,0 +1,15 @@
+# Default values for hello-app-chart.
+replicaCount: 2
+
+image:
+  repository: abhayr110801/hello-app
+  pullPolicy: IfNotPresent
+  # The tag will be updated by our CI/CD pipeline later
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 80
+
+# The port your application's container listens on
+containerPort: 5000
